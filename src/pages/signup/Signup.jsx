@@ -1,13 +1,33 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { FaEye } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { AuthContext } from '../../providers/AuthProvider';
+import Swal from 'sweetalert2';
+import { saveUser } from '../../assets/api/auth';
 
 
 const Signup = () => {
+    const {
+        loading,
+        setLoading,
+        signInWithGoogle,
+        createUser,
+        updateUserProfile,
+      } = useContext(AuthContext);
+      const navigate = useNavigate();
+      const location = useLocation();
+      const from = location.state?.from?.pathname || '/';
+
+      const [show, setShow] = useState(false);
+      const handleTogglePassword = () => {
+          setShow(!show);
+      };
+
+    // for password validation
     const validationSchema = Yup.object().shape({
         password: Yup.string()
             .required('Password is required')
@@ -16,21 +36,82 @@ const Signup = () => {
         confirmPassword: Yup.string()
             .required('Confirm Password is required')
             .oneOf([Yup.ref('password')], 'Passwords must match'),
-        photo:Yup.string().required(' photo is required'),
+        photo:Yup.mixed().required('File is required'),
         name:Yup.string().required(' name is required'),
         email:Yup.string().required(' email is required'),
             
     });
     const formOptions = { resolver: yupResolver(validationSchema) };
+    const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm(formOptions);
-    const password = useRef({});
-    password.current = watch("password");
-    const onSubmit = data => console.log(data);
-    const [show, setShow] = useState(false);
-    const handleTogglePassword = () => {
-        setShow(!show);
+    const { register, handleSubmit, formState: { errors } } = useForm(formOptions);
+    // const password = useRef({});
+    // password.current = watch("password");
+    const url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
+    const onSubmit = data => {
+        console.log(data);
+        const formData = new FormData();
+        formData.append('image', data.photo[0])
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+          .then(imageData => {
+            const imageUrl = imageData.data.display_url;
+            console.log(imageData);
+    
+            createUser(data.email, data.password)
+              .then(result => {
+                updateUserProfile(data.name, imageUrl)
+                  .then(() => {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'User created successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                      saveUser(result.user);
+                    navigate(from, { replace: true });
+                  })
+                  .catch(err => {
+                    setLoading(false)
+                    console.log(err.message)
+                    // toast.error(err.message)
+                  })
+              })
+              .catch(err => {
+                setLoading(false)
+                console.log(err.message)
+                // toast.error(err.message)
+              })
+          })
+          .catch(err => {
+            setLoading(false)
+            console.log(err.message)
+            // toast.error(err.message)
+          })
+    
+    
     };
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+          .then(result => {
+            console.log(result.user)
+            // save user to db
+            saveUser(result.user)
+            navigate(from, { replace: true })
+          })
+          .catch(err => {
+            setLoading(false)
+            console.log(err.message)
+            // toast.error(err.message)
+          })
+      };
+
+
     return (
         <div>
             <Helmet>
@@ -61,7 +142,7 @@ const Signup = () => {
                                     <label className="label">
                                         <span className="label-text">Photo</span>
                                     </label>
-                                    <input type="text" placeholder="photo" {...register("photo")} name='photo' className="input input-bordered" />
+                                    <input type="file" placeholder="photo" {...register("photo")} name='photo' className="input input-bordered" />
                                     {errors.photo && <p>{errors.photo.message}</p>}
                                 </div>
                                 <div className="form-control relative">
@@ -90,7 +171,7 @@ const Signup = () => {
                             </form>
                         </div>
                         <div>
-                            {/* <h1 className='text-center text-red-700'>{error}</h1> */}
+                            <button onClick={handleGoogleSignIn}>google</button>
                         </div>
                     </div>
                 </div>
