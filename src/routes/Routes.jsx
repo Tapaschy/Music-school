@@ -3,6 +3,8 @@ import Home from '../pages/home/Home'
 import Main from '../layouts/Main'
 import Login from '../pages/login/Login'
 import Signup from '../pages/signup/Signup'
+import Dashboard from '../layouts/Dashboard'
+import ManageUser from '../pages/users/admin/ManageUser'
 
 export const router = createBrowserRouter([
   {
@@ -22,5 +24,15 @@ export const router = createBrowserRouter([
         element: <Signup></Signup>
       },
     ],
+  },
+  {
+    path: 'dashboard',
+    element: <Dashboard></Dashboard>,
+    children:[
+        {
+            path: 'manageuser',
+            element: <ManageUser></ManageUser>
+          },
+    ]
   },
 ])

@@ -14,13 +14,13 @@ const Navbar = () => {
 
     const navli = <>
 
-        <li><NavLink >Home</NavLink></li>
+        <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to="/alltoys">All Toys</NavLink></li>
         {
             user ? <><li><NavLink to="/mytoys">My Toys</NavLink></li>
                 <li><NavLink to="/addatoy">Add A Toy</NavLink></li></> : <></>
         }
-        <li><NavLink to="/blog">Blogs</NavLink></li>
+        <li><NavLink to="/dashboard">Dashboard</NavLink></li>
     </>
     return (
         <div className='bg-primary fixed top-0 z-50 w-full '>
