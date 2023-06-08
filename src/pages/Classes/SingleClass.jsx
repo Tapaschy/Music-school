@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const SingleClass = ({singleclass}) => {
+    const{user}=useContext(AuthContext);
     const role=false;
     const {classname,Instructorname,classurl,price,seats}=singleclass;
     console.log(singleclass);
@@ -19,7 +21,7 @@ const SingleClass = ({singleclass}) => {
                     <p>seats:{seats}</p>
                     </div>
                     <div className="card-actions">
-                        <button disabled={seats === 0 || role} className="btn btn-primary">Buy Now</button>
+                        <button disabled={seats === 0 || role} className="btn btn-primary">{user?<>Buy Now</>:<>Please login</>}</button>
                     </div>
                 </div>
             </div>

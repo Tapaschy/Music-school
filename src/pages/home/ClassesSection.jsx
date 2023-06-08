@@ -8,7 +8,7 @@ const ClassesSection = () => {
     const topsixclass = approvedclasses.slice(0, 6);
     return (
         <div className='container mx-auto'>
-            <SectionTitle subHeading="for" heading="Topc lasses" ></SectionTitle>
+            <SectionTitle subHeading="for" heading="Popular classes" ></SectionTitle>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
 
                 {topsixclass.map((singleclass) => 
