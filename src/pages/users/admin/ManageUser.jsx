@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
 const ManageUser = () => {
@@ -31,7 +31,7 @@ const ManageUser = () => {
                     title: `${user.name} is an ${role} Now!`,
                     showConfirmButton: false,
                     timer: 1500
-                  })
+                  });
             }
         })
     }
@@ -73,7 +73,7 @@ const ManageUser = () => {
                             </td>
                             <td>{user?.role}</td>
                             <th>
-                                <button className="btn btn-ghost btn-xs" onClick={()=>handleMakeAdmin(user,"admin")} >Make Admin</button>
+                                <button className="btn btn-ghost btn-xs" onClick={()=>handleMakeAdmin(user,"admin")}>Make Admin</button>
                                 <button className="btn btn-ghost btn-xs" onClick={()=>handleMakeAdmin(user,"instructor")}>Make Instructor</button>
                             </th>
                         </tr>)}

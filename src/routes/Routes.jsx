@@ -5,6 +5,7 @@ import Login from '../pages/login/Login'
 import Signup from '../pages/signup/Signup'
 import Dashboard from '../layouts/Dashboard'
 import ManageUser from '../pages/users/admin/ManageUser'
+import AddClasses from '../pages/users/instructor/AddClasses'
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
         {
             path: 'manageuser',
             element: <ManageUser></ManageUser>
+          },
+        {
+            path: 'addclass',
+            element: <AddClasses></AddClasses>
           },
     ]
   },
