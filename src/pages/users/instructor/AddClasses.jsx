@@ -48,12 +48,12 @@ const AddClasses = () => {
                     .then(res => res.json())
                     .then(data => {
                         console.log(data)
-                        if(data.modifiedCount){
-                            refetch();
+                        if(data.insertedId){
+                            // refetch();
                             Swal.fire({
                                 position: 'top-end',
                                 icon: 'success',
-                                title: `is an  Now!`,
+                                title: `Added a class`,
                                 showConfirmButton: false,
                                 timer: 1500
                               });

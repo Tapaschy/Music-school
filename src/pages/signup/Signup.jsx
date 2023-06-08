@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { FaEye } from 'react-icons/fa';
+import { FaEye, FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -142,7 +142,7 @@ const Signup = () => {
                                     <label className="label">
                                         <span className="label-text">Photo</span>
                                     </label>
-                                    <input type="file" placeholder="photo" {...register("photo")} name='photo' className="input input-bordered" />
+                                    <input type="file" placeholder="photo" {...register("photo")} name='photo' className="file-input file-input-bordered w-full " />
                                     {errors.photo && <p>{errors.photo.message}</p>}
                                 </div>
                                 <div className="form-control relative">
@@ -167,11 +167,9 @@ const Signup = () => {
                                 <div className="form-control mt-6">
                                     <input type="submit" value="Submit" className='btn btn-primary' />
                                 </div>
+                                <button onClick={handleGoogleSignIn} className='btn btn-primary w-full mt-1 mb-1'><FaGoogle></FaGoogle></button>
                                 <Link to={"/login"}><p>Have acount Please login.</p></Link>
                             </form>
-                        </div>
-                        <div>
-                            <button onClick={handleGoogleSignIn}>google</button>
                         </div>
                     </div>
                 </div>

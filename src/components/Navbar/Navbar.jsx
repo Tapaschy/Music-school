@@ -15,7 +15,7 @@ const Navbar = () => {
     const navli = <>
 
         <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to="/alltoys">All Toys</NavLink></li>
+        <li><NavLink to="/classes">All classes</NavLink></li>
         {
             user ? <><li><NavLink to="/mytoys">My Toys</NavLink></li>
                 <li><NavLink to="/addatoy">Add A Toy</NavLink></li></> : <></>
