@@ -14,6 +14,7 @@ const SingleInstructor = ({instructor}) => {
                     <p>{email}</p>
                     <div>
                     <h1>Total classes: {totalClasses}</h1>
+                    <h3 className='font-semibold'>All Classes Name</h3>
                     <p>{classNames.join(', ')}</p>
                 </div>
                 </div>

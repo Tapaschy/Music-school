@@ -8,7 +8,7 @@ const SingleClass = ({singleclass}) => {
     console.log(singleclass);
     return (
         <div>
-            <div className="card w-96 bg-base-100 shadow-xl" style={{ backgroundColor: seats === 0 ? 'red' : 'transparent' }}>
+            <div className="card w-96 bg-base-100  shadow-xl" style={{ backgroundColor: seats === 0 ? 'red' : 'bg-base-100' }}>
                 <figure className="px-10 pt-10">
                     <img src={classurl} alt="Shoes" className="rounded-xl" />
                 </figure>
@@ -21,7 +21,7 @@ const SingleClass = ({singleclass}) => {
                     <p>seats:{seats}</p>
                     </div>
                     <div className="card-actions">
-                        <button disabled={seats === 0 || role} className="btn btn-primary">{user?<>Buy Now</>:<>Please login</>}</button>
+                        <button disabled={seats === 0 || role} className="btn dark:bg-black btn-primary">{user?<>Buy Now</>:<>Please login</>}</button>
                     </div>
                 </div>
             </div>

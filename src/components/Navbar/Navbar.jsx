@@ -1,9 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo/favicon.png'
 
 const Navbar = () => {
+
+    const [darkMode, setDarkMode] = useState(false);
+
+    const toggleTheme = () => {
+        setDarkMode(!darkMode);
+        document.documentElement.classList.toggle('dark');
+        document.body.classList.toggle('bg-black');
+    };
+
 
     const { user, logOut } = useContext(AuthContext);
     const handleLogout = () => {
@@ -17,14 +26,13 @@ const Navbar = () => {
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to="/classes">All classes</NavLink></li>
         {
-            user ? <><li><NavLink to="/dashboard">Dashboard</NavLink></li>
-                <li><NavLink to="/addatoy">Add A Toy</NavLink></li></> : <></>
+            user ? <><li><NavLink to="/dashboard">Dashboard</NavLink></li></> : <></>
         }
-        
+
         <li><NavLink to="/instructors">Instructor</NavLink></li>
     </>
     return (
-        <div className='bg-primary fixed top-0 z-50 w-full '>
+        <div className='bg-primary dark:bg-black fixed top-0 z-50 w-full '>
             <div className='container mx-auto'>
                 <div className="navbar ">
                     <div className="navbar-start">
@@ -44,13 +52,15 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="navbar-end">
+                        
                         {
                             user ? <><label className="btn btn-ghost btn-circle avatar tooltip tooltip-left tooltip-secondary" data-tip={user?.displayName}>
                                 <div className="w-12 rounded-full">
                                     <img src={user?.photoURL} />
                                 </div>
-                            </label><Link onClick={handleLogout} className="btn btn-primary">Log out</Link></> : <Link to={"/login"} className="btn btn-primary">Login</Link>
+                            </label><Link onClick={handleLogout} className="btn dark:bg-black  btn-primary">Log out</Link></> : <Link to={"/login"} className="btn dark:bg-black btn-primary">Login</Link>
                         }
+                        <button className="btn  dark:bg-black  btn-primary hidden md:flex md:ms-2" onClick={toggleTheme}> {darkMode?<>Light</>:<>Dark</>} </button>
                     </div>
 
                 </div>
