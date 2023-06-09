@@ -8,6 +8,8 @@ import ManageUser from '../pages/users/admin/ManageUser'
 import AddClasses from '../pages/users/instructor/AddClasses'
 import AllClasses from '../pages/Classes/AllClasses'
 import Allinstructor from '../pages/Allinstructor/Allinstructor'
+import MyClasses from '../pages/users/instructor/MyClasses'
+import UpdateClass from '../pages/users/instructor/UpdateClass'
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +49,15 @@ export const router = createBrowserRouter([
         {
             path: 'addclass',
             element: <AddClasses></AddClasses>
+          },
+        {
+            path: 'myclass',
+            element: <MyClasses></MyClasses>
+          },
+        {
+            path: 'updateclass/:id',
+            element: <UpdateClass></UpdateClass>,
+            loader:({params})=>fetch(`http://localhost:5000/classes/updateclass/${params.id}`)
           },
     ]
   },

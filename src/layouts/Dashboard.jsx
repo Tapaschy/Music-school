@@ -34,8 +34,8 @@ const Dashboard = () => {
                             <li> <NavLink to="/dashboard/manageuser"><FaUser></FaUser> Manage user</NavLink> </li></>
                         )}
                         {userRole == 'instructor' && (<>
-                            <li><a>Sidebar Item 1</a></li>
-                            <li> <NavLink to="/dashboard/addclass"><FaBookReader></FaBookReader> Add classes</NavLink> </li></>
+                            <li> <NavLink to="/dashboard/addclass"><FaBookReader></FaBookReader> Add classes</NavLink> </li>
+                            <li> <NavLink to="/dashboard/myclass"><FaBookReader></FaBookReader> My classes</NavLink> </li></>
                         )}
 
 
