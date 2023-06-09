@@ -37,7 +37,7 @@ const ManageUser = () => {
     }
     return (
         <div className='w-full'>
-            <h1>Total user:{users.length}</h1>
+            <h1 className='text-center font-bold text-2xl'>Total user:{users.length}</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     {/* head */}
