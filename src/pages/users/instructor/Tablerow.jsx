@@ -26,7 +26,7 @@ const Tablerow = ({singlecls,index}) => {
                 <td>{singlecls.seats}</td>
                 <td>{singlecls.status}</td>
                 <td>enrolled</td>
-                <td>Feedback</td>
+                <td>{singlecls.feedback}</td>
                 <th>
                     <Link to={`/dashboard/updateclass/${singlecls._id}`}><button className="btn btn-ghost btn-xs">Update</button></Link>
                 </th>

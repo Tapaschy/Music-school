@@ -91,7 +91,7 @@ const ManageClasses = () => {
                             <th>
                                 <button disabled={singleclass.status === disable || singleclass.status === 'approve'} className="btn btn-ghost btn-xs" onClick={() => handleclassStatus(singleclass, "approve",singleclass.feedback)}>Approve</button>
                                 <button disabled={singleclass.status === disable || singleclass.status === 'deny'} className="btn btn-ghost btn-xs" onClick={() => handleclassStatus(singleclass, "deny",singleclass.feedback)}>Deny </button>
-                                <label htmlFor={singleclass._id} className="btn btn-ghost btn-xs">send feedback</label>
+                                <label disabled={singleclass.status === 'pending' || singleclass.status === 'approve'} htmlFor={singleclass._id} className="btn btn-ghost btn-xs">send feedback</label>
                                 {/*  */}
 
                                 

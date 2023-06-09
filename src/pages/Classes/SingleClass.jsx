@@ -1,11 +1,62 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import useCart from '../../hooks/useCart';
 
 const SingleClass = ({singleclass}) => {
     const{user}=useContext(AuthContext);
     const role=false;
-    const {classname,Instructorname,classurl,price,seats}=singleclass;
+    const {classname,Instructorname,classurl,price,seats,_id}=singleclass;
     console.log(singleclass);
+
+
+    const [, refetch] = useCart();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleAddToCart = () => {
+        // console.log(item);
+        if(user && user.email){
+            const cartItem = {classId: _id, classname, classurl, price,seats, email: user.email}
+            fetch('http://localhost:5000/carts', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(cartItem)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.insertedId){
+                    refetch(); 
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Class added to the cart.',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
+                }
+            })
+        }
+        else{
+            Swal.fire({
+                title: 'Please login to booked class',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login now!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  navigate('/login', {state: {from: location}})
+                }
+              })
+        }
+    }
+
+
     return (
         <div>
             <div className="card w-96 bg-base-100  shadow-xl" style={{ backgroundColor: seats === 0 ? 'red' : 'bg-base-100' }}>
@@ -21,7 +72,7 @@ const SingleClass = ({singleclass}) => {
                     <p>seats:{seats}</p>
                     </div>
                     <div className="card-actions">
-                        <button disabled={seats === 0 || role} className="btn dark:bg-black btn-primary">{user?<>Buy Now</>:<>Please login</>}</button>
+                        <button onClick={() => handleAddToCart()}  disabled={seats === 0 || role} className="btn dark:bg-black btn-primary">{user?<>Buy Now</>:<>Please login</>}</button>
                     </div>
                 </div>
             </div>

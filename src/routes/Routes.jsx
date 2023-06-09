@@ -11,11 +11,14 @@ import Allinstructor from '../pages/Allinstructor/Allinstructor'
 import MyClasses from '../pages/users/instructor/MyClasses'
 import UpdateClass from '../pages/users/instructor/UpdateClass'
 import ManageClasses from '../pages/users/admin/ManageClasses'
+import Errorpage from '../pages/errorpage/Errorpage'
+import MyselectedClasses from '../pages/users/student/MyselectedClasses'
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
+    errorElement:<Errorpage></Errorpage>,
     children: [
       {
         path: '/',
@@ -63,6 +66,10 @@ export const router = createBrowserRouter([
             path: 'updateclass/:id',
             element: <UpdateClass></UpdateClass>,
             loader:({params})=>fetch(`http://localhost:5000/classes/updateclass/${params.id}`)
+          },
+          {
+            path: 'selectedclass',
+            element: <MyselectedClasses></MyselectedClasses>
           },
     ]
   },

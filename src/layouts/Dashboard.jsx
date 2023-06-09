@@ -38,6 +38,10 @@ const Dashboard = () => {
                             <li> <NavLink to="/dashboard/addclass"><FaBookReader></FaBookReader> Add classes</NavLink> </li>
                             <li> <NavLink to="/dashboard/myclass"><FaBookReader></FaBookReader> My classes</NavLink> </li></>
                         )}
+                        {userRole == 'instructor' && (<>
+                            <li> <NavLink to="/dashboard/selectedclass"><FaBookReader></FaBookReader> My selected classes</NavLink> </li>
+                            <li> <NavLink to="/dashboard/myclass"><FaBookReader></FaBookReader> My classes</NavLink> </li></>
+                        )}
 
 
 
