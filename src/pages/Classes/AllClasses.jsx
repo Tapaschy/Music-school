@@ -5,7 +5,8 @@ import SingleClass from './SingleClass';
 import useFilterclass from '../../hooks/useFilterclass';
 
 const AllClasses = () => {
-    const [approvedclasses]=useFilterclass();
+    const [classes]=useFilterclass();
+    const approvedclasses = classes.filter(classes => classes.status === 'approve').sort((a, b) => b.price - a.price)
 
     // const { data, refetch } = useQuery(['classes'], fetchUsers);
 

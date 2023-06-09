@@ -10,6 +10,7 @@ import AllClasses from '../pages/Classes/AllClasses'
 import Allinstructor from '../pages/Allinstructor/Allinstructor'
 import MyClasses from '../pages/users/instructor/MyClasses'
 import UpdateClass from '../pages/users/instructor/UpdateClass'
+import ManageClasses from '../pages/users/admin/ManageClasses'
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
         {
             path: 'manageuser',
             element: <ManageUser></ManageUser>
+          },
+        {
+            path: 'manageclasses',
+            element: <ManageClasses></ManageClasses>
           },
         {
             path: 'addclass',

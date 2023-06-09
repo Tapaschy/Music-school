@@ -29,9 +29,10 @@ const Dashboard = () => {
                     <ul className="menu p-4 w-80 h-full bg-primary text-base-content">
                         {/* Sidebar content here */}
 
-                        {userRole === 'admin' && (<>
-                            <li><a>Sidebar Item 1</a></li>
-                            <li> <NavLink to="/dashboard/manageuser"><FaUser></FaUser> Manage user</NavLink> </li></>
+                        {userRole === 'instructor' && (<>
+                            <li> <NavLink to="/dashboard/manageuser"><FaUser></FaUser> Manage user</NavLink> </li>
+                            <li> <NavLink to="/dashboard/manageclasses"><FaUser></FaUser> Manage Classes</NavLink> </li>
+                            </>
                         )}
                         {userRole == 'instructor' && (<>
                             <li> <NavLink to="/dashboard/addclass"><FaBookReader></FaBookReader> Add classes</NavLink> </li>

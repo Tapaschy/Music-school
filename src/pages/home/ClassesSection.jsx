@@ -4,7 +4,8 @@ import useFilterclass from '../../hooks/useFilterclass';
 import SingleClass from '../Classes/SingleClass';
 
 const ClassesSection = () => {
-    const [approvedclasses]=useFilterclass();
+    const [classes]=useFilterclass();
+    const approvedclasses = classes.filter(classes => classes.status === 'approve').sort((a, b) => b.price - a.price);
     const topsixclass = approvedclasses.slice(0, 6);
     return (
         <div className='container mx-auto'>
