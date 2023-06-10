@@ -32,7 +32,7 @@ const Signup = () => {
         password: Yup.string()
             .required('Password is required')
             .min(6, 'Password must be at least 6 characters')
-            .matches(/(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,'Password must a character,1 number,1 special character'),
+            .matches(/(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,'Password must 1 small,1 capital letter ,1 number,1 special character'),
         confirmPassword: Yup.string()
             .required('Confirm Password is required')
             .oneOf([Yup.ref('password')], 'Passwords must match'),

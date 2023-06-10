@@ -3,16 +3,21 @@ import { FaBookReader, FaHome, FaUser } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import useRole from '../hooks/useRole';
 
 const Dashboard = () => {
-    const { user } = useContext(AuthContext);
-    // console.log(user);
-    const { data: role = [], refetch,isLoading } = useQuery(['role',user?.email], async () => {
-        const res = await fetch(`http://localhost:5000/users/role/${user.email}`)
-        return res.json();
-    });
+    const [role] = useRole();
+
+    // const { user } = useContext(AuthContext);
+    // const [axiosSecure] = useAxiosSecure();
+    // // console.log(user);
+    // const { data: role = [], refetch,isLoading } = useQuery(['role',user?.email], async () => {
+    //     const res = await axiosSecure(`users/role/${user.email}`)
+    //     return res.data;
+    // });
     const userRole = role.role;
-    console.log(userRole);
+    // console.log(userRole);
 
     return (
         <div>
@@ -29,16 +34,16 @@ const Dashboard = () => {
                     <ul className="menu p-4 w-80 h-full bg-primary text-base-content">
                         {/* Sidebar content here */}
 
-                        {userRole === 'instructor' && (<>
+                        {userRole == 'admin' && (<>
                             <li> <NavLink to="/dashboard/manageuser"><FaUser></FaUser> Manage user</NavLink> </li>
                             <li> <NavLink to="/dashboard/manageclasses"><FaUser></FaUser> Manage Classes</NavLink> </li>
-                            </>
+                        </>
                         )}
                         {userRole == 'instructor' && (<>
                             <li> <NavLink to="/dashboard/addclass"><FaBookReader></FaBookReader> Add classes</NavLink> </li>
                             <li> <NavLink to="/dashboard/myclass"><FaBookReader></FaBookReader> My classes</NavLink> </li></>
                         )}
-                        {userRole == 'instructor' && (<>
+                        {userRole == 'student' && (<>
                             <li> <NavLink to="/dashboard/selectedclass"><FaBookReader></FaBookReader> My selected classes</NavLink> </li>
                             <li> <NavLink to="/dashboard/myclass"><FaBookReader></FaBookReader> My classes</NavLink> </li></>
                         )}

@@ -13,6 +13,8 @@ import UpdateClass from '../pages/users/instructor/UpdateClass'
 import ManageClasses from '../pages/users/admin/ManageClasses'
 import Errorpage from '../pages/errorpage/Errorpage'
 import MyselectedClasses from '../pages/users/student/MyselectedClasses'
+import PrivateRoute from './PrivateRoute'
+import AdminRoute from './AdminRoute'
 
 export const router = createBrowserRouter([
   {
@@ -44,15 +46,15 @@ export const router = createBrowserRouter([
   },
   {
     path: 'dashboard',
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children:[
         {
             path: 'manageuser',
-            element: <ManageUser></ManageUser>
+            element: <AdminRoute><ManageUser></ManageUser></AdminRoute>
           },
         {
             path: 'manageclasses',
-            element: <ManageClasses></ManageClasses>
+            element: <AdminRoute><ManageClasses></ManageClasses></AdminRoute>
           },
         {
             path: 'addclass',

@@ -36,7 +36,7 @@ const MyselectedClasses = () => {
     };
     return (
         <div className='w-full'>
-            <h1 className='text-center font-bold text-2xl'>Total user:{carts.length}</h1>
+            <h1 className='text-center font-bold text-2xl'>Total Booked Class:{carts.length}</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     {/* head */}
