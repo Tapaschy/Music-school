@@ -3,6 +3,7 @@ import Slider from '../../components/Slider/Slider';
 import { Helmet } from 'react-helmet-async';
 import MusicGroups from '../music groups/MusicGroups';
 import ClassesSection from './ClassesSection';
+import InstructorSection from './InstructorSection';
 
 const Home = () => {
 
@@ -13,6 +14,7 @@ const Home = () => {
                 <title>MUSIC FAIRY || Home</title>
             </Helmet>
             <Slider></Slider>
+            <InstructorSection></InstructorSection>
             <ClassesSection></ClassesSection>
             <MusicGroups></MusicGroups>
         </div>

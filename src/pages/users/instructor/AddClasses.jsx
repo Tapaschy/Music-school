@@ -35,6 +35,7 @@ const AddClasses = () => {
                         classurl: imgURL,
                         status:'pending',
                         photoUrl:user?.photoURL,
+                        enrolled:0,
 
                     }
                     console.log(newClass);

@@ -1,22 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useCart from '../../hooks/useCart';
+import useRole from '../../hooks/useRole';
 
 const SingleClass = ({singleclass}) => {
     const{user}=useContext(AuthContext);
-    const role=false;
+    const[role]=useRole();
+    const userrole=role.role;
+
     const {classname,Instructorname,classurl,price,seats,_id}=singleclass;
     console.log(singleclass);
 
 
-    const [, refetch] = useCart();
+    // const [, refetch] = useCart();
     const navigate = useNavigate();
     const location = useLocation();
 
     const handleAddToCart = () => {
-        // console.log(item);
         if(user && user.email){
             const cartItem = {classId: _id, classname, classurl, price,seats, email: user.email}
             fetch('http://localhost:5000/carts', {
@@ -29,7 +31,7 @@ const SingleClass = ({singleclass}) => {
             .then(res => res.json())
             .then(data => {
                 if(data.insertedId){
-                    refetch(); 
+                    // refetch(); 
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -72,7 +74,7 @@ const SingleClass = ({singleclass}) => {
                     <p>seats:{seats}</p>
                     </div>
                     <div className="card-actions">
-                        <button onClick={() => handleAddToCart()}  disabled={seats === 0 || role} className="btn dark:bg-black btn-primary">{user?<>Buy Now</>:<>Please login</>}</button>
+                        <button onClick={() => handleAddToCart()}  disabled={seats === 0 || userrole=="admin" || userrole=="instructor" } className="btn dark:bg-black btn-primary">{user?<>Buy Now</>:<>Please login</>}</button>
                     </div>
                 </div>
             </div>
