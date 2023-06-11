@@ -15,6 +15,10 @@ import Errorpage from '../pages/errorpage/Errorpage'
 import MyselectedClasses from '../pages/users/student/MyselectedClasses'
 import PrivateRoute from './PrivateRoute'
 import AdminRoute from './AdminRoute'
+import AdminHome from '../pages/users/admin/AdminHome'
+import InstructorHome from '../pages/users/instructor/InstructorHome'
+import StudentHome from '../pages/users/student/StudentHome'
+import Payment from '../pages/users/student/Payment'
 
 export const router = createBrowserRouter([
   {
@@ -57,8 +61,24 @@ export const router = createBrowserRouter([
             element: <AdminRoute><ManageClasses></ManageClasses></AdminRoute>
           },
         {
+            path: 'adminhome',
+            element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+          },
+        {
             path: 'addclass',
             element: <AddClasses></AddClasses>
+          },
+        {
+            path: 'instuctorhome',
+            element: <InstructorHome></InstructorHome>
+          },
+        {
+            path: 'studenthome',
+            element: <StudentHome></StudentHome>
+          },
+        {
+            path: 'payment',
+            element: <Payment></Payment>
           },
         {
             path: 'myclass',

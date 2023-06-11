@@ -7,7 +7,7 @@ const Footer = () => {
         <div className=' bg-primary dark:bg-black mt-5  border-t-2 dark:border-primary '>
             <footer className=" footer  p-10 text-neutral-content container mx-auto items-center">
                 <div className='flex'>
-                    <a href=""><img src={logo} alt="" className='h-50 w-50' /></a>
+                    <Link to="/"><img src={logo} alt="" className='h-50 w-50' /></Link>
                 </div>
 
                 <div className='list-none'>

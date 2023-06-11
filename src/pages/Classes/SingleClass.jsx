@@ -40,6 +40,9 @@ const SingleClass = ({singleclass}) => {
                         timer: 1500
                       })
                 }
+                Swal.fire(
+                    'Already Booked',
+                  )
             })
         }
         else{

@@ -2,8 +2,12 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo/favicon.png'
+import useRole from '../../hooks/useRole';
+import { FaHome } from 'react-icons/fa';
 
 const Navbar = () => {
+    const [role] = useRole();
+    const userRole = role.role;
 
     const [darkMode, setDarkMode] = useState(false);
 
@@ -25,9 +29,21 @@ const Navbar = () => {
 
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to="/classes">All classes</NavLink></li>
-        {
+        {/* {
             user ? <><li><NavLink to="/dashboard">Dashboard</NavLink></li></> : <></>
-        }
+        } */}
+        {userRole == 'admin' && (<>
+            <li> <NavLink to="/dashboard/adminhome"> Dashboard</NavLink> </li>
+        </>
+        )}
+        {userRole == 'instructor' && (<>
+            <li> <NavLink to="/dashboard/instuctorhome"> Dashboard</NavLink> </li>
+        </>
+        )}
+        {userRole == 'student' && (<>
+            <li> <NavLink to="/dashboard/studenthome"> Dashboard</NavLink> </li>
+        </>
+        )}
 
         <li><NavLink to="/instructors">Instructor</NavLink></li>
     </>
@@ -52,7 +68,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        
+
                         {
                             user ? <><label className="btn btn-ghost btn-circle avatar tooltip tooltip-left tooltip-secondary" data-tip={user?.displayName}>
                                 <div className="w-12 rounded-full">
@@ -60,7 +76,7 @@ const Navbar = () => {
                                 </div>
                             </label><Link onClick={handleLogout} className="btn dark:bg-black  btn-primary">Log out</Link></> : <Link to={"/login"} className="btn dark:bg-black btn-primary">Login</Link>
                         }
-                        <button className="btn  dark:bg-black  btn-primary hidden md:flex md:ms-2" onClick={toggleTheme}> {darkMode?<>Light</>:<>Dark</>} </button>
+                        <button className="btn  dark:bg-black  btn-primary hidden md:flex md:ms-2" onClick={toggleTheme}> {darkMode ? <>Light</> : <>Dark</>} </button>
                     </div>
 
                 </div>

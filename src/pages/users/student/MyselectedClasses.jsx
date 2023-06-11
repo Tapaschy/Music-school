@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useCart from '../../../hooks/useCart';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
+import CheckoutForm from './CheckoutForm';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+
+
+const stripePromise = loadStripe(import.meta.env.VITE_Pay_Upload_token);
 
 const MyselectedClasses = () => {
-    const[carts,refetch]=useCart();
-    console.log(carts);
+    const [carts, refetch] = useCart();
+    const[price,setPrice]=useState('');
+    const[id,setId]=useState('');
+    console.log(price);
+    const handleprice=(price,id)=>{
+        setPrice(price);
+        setId(id);
+    };
 
     const handleDelete = cart => {
         Swal.fire({
@@ -54,7 +67,7 @@ const MyselectedClasses = () => {
                     <tbody>
                         {/* row 1 */}
                         {carts.map((cart, index) => <tr key={cart._id}>
-                            <th>{index+1}
+                            <th>{index + 1}
                             </th>
                             <td>
                                 <div className="flex items-center space-x-3">
@@ -74,8 +87,31 @@ const MyselectedClasses = () => {
                             <td>{cart?.price}</td>
                             <td>{cart?.seats}</td>
                             <th>
-                                <button onClick={()=>handleDelete(cart)} className="btn btn-ghost btn-xs" >Delete</button>
-                                <button className="btn btn-ghost btn-xs" >Pay</button>
+                                <button onClick={() => handleDelete(cart)} className="btn btn-ghost btn-xs" >Delete</button>
+                                {/* <Link to="/dashboard/payment"><button className="btn btn-ghost btn-xs" >Pay</button></Link> */}
+
+                                <label onClick={()=>handleprice(cart.price,cart._id)} htmlFor={cart._id} className="btn btn-ghost btn-xs">Pay</label>
+
+                                {/* Put this part before </body> tag */}
+                                <input type="checkbox" id={cart._id} className="modal-toggle" />
+                                <div className="modal">
+                                    <div className="modal-box">
+                                        <h3 className="font-bold text-lg">Pay now</h3>
+                                        <div>
+
+                                            <Elements stripe={stripePromise}>
+                                                <CheckoutForm price={price} id={id} />
+                                            </Elements>
+                                        </div>
+                                        <div className="modal-action">
+                                            <label htmlFor={cart._id} className="btn">Close!</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
                             </th>
                         </tr>)}
 

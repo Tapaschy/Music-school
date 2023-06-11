@@ -14,7 +14,7 @@ const MyClasses = () => {
 
     return (
         <div className='w-full'>
-            <h1>Total Classes:{myclasses.length}</h1>
+            <h1 className='font-bold text-2xl text-center'>Total Classes:{myclasses.length}</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     {/* head */}
