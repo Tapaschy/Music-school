@@ -79,19 +79,19 @@ const Signup = () => {
                   .catch(err => {
                     setLoading(false)
                     console.log(err.message)
-                    // toast.error(err.message)
+
                   })
               })
               .catch(err => {
                 setLoading(false)
                 console.log(err.message)
-                // toast.error(err.message)
+
               })
           })
           .catch(err => {
             setLoading(false)
             console.log(err.message)
-            // toast.error(err.message)
+
           })
     
     

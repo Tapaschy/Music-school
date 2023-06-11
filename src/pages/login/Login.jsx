@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { saveUser } from '../../assets/api/auth';
 
 const Login = () => {
+    const[error,setError]=useState('');
     const [show, setShow] = useState(false);
     const handleTogglePassword = () => {
         setShow(!show);
@@ -35,6 +36,7 @@ const Login = () => {
     .catch(err => {
       setLoading(false)
       console.log(err.message)
+      setError(err.message);
     })
 
 };
@@ -49,7 +51,7 @@ const handleGoogleSignIn = () => {
       .catch(err => {
         setLoading(false)
         console.log(err.message)
-        toast.error(err.message)
+        setError(err.message);
       })
   };
     return (
@@ -83,6 +85,9 @@ const handleGoogleSignIn = () => {
                                 <button onClick={handleGoogleSignIn} className='btn btn-primary w-full mt-1 mb-1'><FaGoogle></FaGoogle></button>
                                 <Link to={"/signup"}><p>No account ? please signup</p></Link>
                             </form>
+                            <div>
+                                <p className='text-red-800'>{error}</p>
+                            </div>
                         </div>
                     </div>
                 </div>

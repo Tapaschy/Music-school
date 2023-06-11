@@ -4,20 +4,12 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <div className=' bg-primary dark:bg-black mt-5  border-t-2 dark:border-primary '>
+        <div className=' bg-primary dark:bg-black mt-5  border-t-2 dark:border-primary pb-5'>
             <footer className=" footer  p-10 text-neutral-content container mx-auto items-center">
                 <div className='flex'>
                     <Link to="/"><img src={logo} alt="" className='h-50 w-50' /></Link>
                 </div>
 
-                <div className='list-none'>
-                    <span className="footer-title">Link</span>
-                    <Link to="" className="link link-hover"><li>Home</li></Link>
-                    <Link to="/alltoys" className="link link-hover"><li>All Toys</li></Link>
-                    <Link to="/mytoys" className="link link-hover"><li>My Toys</li></Link>
-                    <Link to="/addatoy" className="link link-hover"><li>Add A Toy</li></Link>
-                    <Link to="" className="link link-hover"><li>Blogs</li></Link>
-                </div>
                 <div>
                     <span className="footer-title">Social</span>
                     <div className="grid grid-flow-col gap-4">
@@ -26,7 +18,20 @@ const Footer = () => {
                         <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
                     </div>
                 </div>
+
+                <div className='list-none'>
+                    <span className="footer-title">Link</span>
+                    <Link to="" className="link link-hover"><li>Home</li></Link>
+                    <Link to="/classes" className="link link-hover"><li>All Classes</li></Link>
+                    <Link to="/instructors" className="link link-hover"><li>All Instructor</li></Link>
+                </div>
+
+
             </footer>
+
+            <div className='text-center text-white'>
+                <p>Copyright © 2023 - All right reserved by MUSCI FAIRY</p>
+            </div>
         </div>
     );
 };
