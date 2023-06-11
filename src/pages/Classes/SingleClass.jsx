@@ -31,6 +31,7 @@ const SingleClass = ({singleclass}) => {
             .then(res => res.json())
             .then(data => {
                 if(data.insertedId){
+                    console.log(data);
                     // refetch(); 
                     Swal.fire({
                         position: 'top-end',
@@ -40,9 +41,12 @@ const SingleClass = ({singleclass}) => {
                         timer: 1500
                       })
                 }
-                Swal.fire(
-                    'Already Booked',
-                  )
+                else{
+                    Swal.fire(
+                        'Already Booked',
+                      )
+                }
+
             })
         }
         else{

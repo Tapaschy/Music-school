@@ -12,11 +12,13 @@ const stripePromise = loadStripe(import.meta.env.VITE_Pay_Upload_token);
 const MyselectedClasses = () => {
     const [carts, refetch] = useCart();
     const[price,setPrice]=useState('');
+    const[classId,setclassId]=useState('');
     const[id,setId]=useState('');
     console.log(price);
-    const handleprice=(price,id)=>{
+    const handleprice=(price,id,classId)=>{
         setPrice(price);
         setId(id);
+        setclassId(classId);
     };
 
     const handleDelete = cart => {
@@ -90,7 +92,7 @@ const MyselectedClasses = () => {
                                 <button onClick={() => handleDelete(cart)} className="btn btn-ghost btn-xs" >Delete</button>
                                 {/* <Link to="/dashboard/payment"><button className="btn btn-ghost btn-xs" >Pay</button></Link> */}
 
-                                <label onClick={()=>handleprice(cart.price,cart._id)} htmlFor={cart._id} className="btn btn-ghost btn-xs">Pay</label>
+                                <label onClick={()=>handleprice(cart.price,cart._id,cart.classId)} htmlFor={cart._id} className="btn btn-ghost btn-xs">Pay</label>
 
                                 {/* Put this part before </body> tag */}
                                 <input type="checkbox" id={cart._id} className="modal-toggle" />
@@ -100,7 +102,7 @@ const MyselectedClasses = () => {
                                         <div>
 
                                             <Elements stripe={stripePromise}>
-                                                <CheckoutForm price={price} id={id} />
+                                                <CheckoutForm price={price} id={id} classId={classId}/>
                                             </Elements>
                                         </div>
                                         <div className="modal-action">

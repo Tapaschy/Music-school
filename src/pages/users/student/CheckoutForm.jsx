@@ -8,7 +8,8 @@ import Swal from "sweetalert2";
 import useCart from "../../../hooks/useCart";
 
 
-const CheckoutForm = ({price,id}) => {
+const CheckoutForm = ({price,id,classId}) => {
+    console.log(classId);
     console.log(price);
     const[cart, refetch]=useCart();
     const stripe = useStripe();
@@ -86,6 +87,7 @@ const CheckoutForm = ({price,id}) => {
                 transactionId: paymentIntent.id,
                 price,
                 itemId:id,
+                classId:classId,
             }
             axiosSecure.post('/payments', payment)
                 .then(res => {
