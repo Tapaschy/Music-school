@@ -45,7 +45,7 @@ const Allinstructor = () => {
     return (
         <div className='mt-20 container mx-auto'>
             <SectionTitle subHeading="" heading="All Instructors" ></SectionTitle>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
+            <div className='grid grid-cols-1  md:grid-cols-3 gap-5'>
 
                 {instructors.map(instructor =>
                     <SingleInstructor key={instructor.name}

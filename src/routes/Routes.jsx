@@ -19,6 +19,7 @@ import AdminHome from '../pages/users/admin/AdminHome'
 import InstructorHome from '../pages/users/instructor/InstructorHome'
 import StudentHome from '../pages/users/student/StudentHome'
 import Payment from '../pages/users/student/Payment'
+import EnrolledClasses from '../pages/users/student/EnrolledClasses'
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
         {
             path: 'studenthome',
             element: <StudentHome></StudentHome>
+          },
+        {
+            path: 'enrolled',
+            element: <EnrolledClasses></EnrolledClasses>
           },
         {
             path: 'payment',

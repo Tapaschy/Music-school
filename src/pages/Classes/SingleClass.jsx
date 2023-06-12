@@ -12,7 +12,7 @@ const SingleClass = ({ singleclass }) => {
     const userrole = role.role;
 
     const { classname, Instructorname, classurl, price, seats, _id } = singleclass;
-    console.log(singleclass);
+    // console.log(singleclass);
 
 
     // const [, refetch] = useCart();
@@ -92,7 +92,7 @@ const SingleClass = ({ singleclass }) => {
                         <p>seats:{seats}</p>
                     </div>
                     <div className="card-actions">
-                        <button onClick={() => handleAddToCart()} disabled={seats === 0 || userrole == "admin" || userrole == "instructor"} className="btn dark:bg-black btn-primary">{user ? <>Buy Now</> : <>Please login</>}</button>
+                        <button onClick={() => handleAddToCart()} disabled={seats === 0 || userrole == "admin" || userrole == "instructor"} className="btn dark:bg-black btn-primary">{user ? <>Book Now</> : <>Please login</>}</button>
                     </div>
                 </div>
             </div>

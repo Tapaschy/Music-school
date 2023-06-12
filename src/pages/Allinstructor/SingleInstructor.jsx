@@ -4,12 +4,12 @@ import { motion } from "framer-motion"
 
 const SingleInstructor = ({ instructor }) => {
     const { email, name, photoURL, role } = instructor;
-    console.log(instructor);
+    // console.log(instructor);
     return (
         <div>
 
-            <motion.div animate={{ rotate: [0, 200, 200, 0] }}
-                transition={{ duration: 5 }} className="card  bg-base-100 shadow-xl border border-primary">
+            <motion.div animate={{ rotate: [0, 50, 50, 0] }}
+                transition={{ duration: 2 }} className="card  bg-base-100 shadow-xl border border-primary">
                 <figure className="px-10 pt-10">
                     <motion.div whileHover={{
                         scale: 1.2,

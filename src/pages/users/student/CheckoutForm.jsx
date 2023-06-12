@@ -8,9 +8,10 @@ import Swal from "sweetalert2";
 import useCart from "../../../hooks/useCart";
 
 
-const CheckoutForm = ({price,id,classId}) => {
-    console.log(classId);
-    console.log(price);
+const CheckoutForm = ({classcart}) => {
+    console.log(classcart);
+    const{price,_id,classId,classname,classurl}=classcart;
+    // console.log(price);
     const[cart, refetch]=useCart();
     const stripe = useStripe();
     const elements = useElements();
@@ -86,17 +87,19 @@ const CheckoutForm = ({price,id,classId}) => {
                 email: user?.email,
                 transactionId: paymentIntent.id,
                 price,
-                itemId:id,
+                itemId:_id,
                 classId:classId,
+                classname,
+                classurl,
             }
             axiosSecure.post('/payments', payment)
                 .then(res => {
                     console.log(res.data);
-                    if (res.data.insertedId) {
+                    if (res.data.enrooledresult.modifiedCount>0) {
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
-                            title: 'Your work has been saved',
+                            title: 'Payment successful',
                             showConfirmButton: false,
                             timer: 1500
                         })

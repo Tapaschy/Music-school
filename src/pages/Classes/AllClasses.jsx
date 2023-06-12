@@ -8,20 +8,6 @@ const AllClasses = () => {
     const [classes]=useFilterclass();
     const approvedclasses = classes.filter(classes => classes.status === 'approve').sort((a, b) => b.enrolled - a.enrolled);
 
-    // const { data, refetch } = useQuery(['classes'], fetchUsers);
-
-    // async function fetchUsers() {
-    //     const response = await fetch('http://localhost:5000/classes');
-    //     const result = await response.json();
-    //     //   console.log(result);
-
-    //     // Filter the 'approved' documents
-    //     const approvedclasses = result.filter(classes => classes.status === 'pending').sort((a, b) => b.seats - a.seats);
-    //       console.log(approvedclasses);
-    //     return approvedclasses;
-    // }
-    // const topsixclass = approvedclasses.slice(0, 6);
-    // console.log(data);
     return (
         <div className='mt-20 container mx-auto'>
             <SectionTitle subHeading="" heading="All classes" ></SectionTitle>

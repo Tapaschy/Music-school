@@ -7,7 +7,7 @@ const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
 
 const AddClasses = () => {
     const { user } = useContext(AuthContext);
-    console.log(user);
+    // console.log(user);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
 

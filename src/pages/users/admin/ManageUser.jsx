@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { FaUserSecret } from 'react-icons/fa';
 
 const ManageUser = () => {
     const [axiosSecure] = useAxiosSecure();
@@ -73,7 +74,7 @@ const ManageUser = () => {
                             <td>
                                 {user?.email}
                             </td>
-                            <td>{user?.role}</td>
+                            <td>{user?.role!=='admin'?<>{user?.role}</>:<><button className='btn btn-primary'><FaUserSecret></FaUserSecret></button></>}</td>
                             <th>
                                 <button className="btn btn-ghost btn-xs" onClick={()=>handleMakeAdmin(user,"admin")}>Make Admin</button>
                                 <button className="btn btn-ghost btn-xs" onClick={()=>handleMakeAdmin(user,"instructor")}>Make Instructor</button>

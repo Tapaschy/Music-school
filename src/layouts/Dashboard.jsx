@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { FaBookReader, FaHome, FaUser } from 'react-icons/fa';
+import { FaBookReader, FaBookmark, FaHive, FaHome, FaHouseUser, FaReadme, FaUser } from 'react-icons/fa';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
@@ -41,20 +41,20 @@ const Dashboard = () => {
                         {/* Sidebar content here */}
 
                         {userRole == 'admin' && (<>
-                            <li> <NavLink to="/dashboard/adminhome"><FaHome></FaHome> Admin Home</NavLink> </li>
+                            <li> <NavLink to="/dashboard/adminhome"><FaHouseUser></FaHouseUser> Admin Home</NavLink> </li>
                             <li> <NavLink to="/dashboard/manageuser"><FaUser></FaUser> Manage user</NavLink> </li>
-                            <li> <NavLink to="/dashboard/manageclasses"><FaUser></FaUser> Manage Classes</NavLink> </li>
+                            <li> <NavLink to="/dashboard/manageclasses"><FaReadme></FaReadme> Manage Classes</NavLink> </li>
                         </>
                         )}
                         {userRole == 'instructor' && (<>
-                            <li> <NavLink to="/dashboard/instuctorhome"><FaHome></FaHome> Instructor Home</NavLink> </li>
-                            <li> <NavLink to="/dashboard/addclass"><FaBookReader></FaBookReader> Add classes</NavLink> </li>
+                            <li> <NavLink to="/dashboard/instuctorhome"><FaHouseUser></FaHouseUser> Instructor Home</NavLink> </li>
+                            <li> <NavLink to="/dashboard/addclass"><FaHive></FaHive> Add classes</NavLink> </li>
                             <li> <NavLink to="/dashboard/myclass"><FaBookReader></FaBookReader> My classes</NavLink> </li></>
                         )}
                         {userRole == 'student' && (<>
-                            <li> <NavLink to="/dashboard/studenthome"><FaHome></FaHome> Student Home</NavLink> </li>
-                            <li> <NavLink to="/dashboard/selectedclass"><FaBookReader></FaBookReader> My selected classes</NavLink> </li>
-                            <li> <NavLink to="/dashboard/myclass"><FaBookReader></FaBookReader> My classes</NavLink> </li>
+                            <li> <NavLink to="/dashboard/studenthome"><FaHouseUser></FaHouseUser> Student Home</NavLink> </li>
+                            <li> <NavLink to="/dashboard/selectedclass"><FaBookmark></FaBookmark> My selected classes</NavLink> </li>
+                            <li> <NavLink to="/dashboard/enrolled"><FaBookReader></FaBookReader> My Enrolled classes</NavLink> </li>
                             </>
                         )}
 
