@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { FaUserSecret } from 'react-icons/fa';
+import { Helmet } from 'react-helmet-async';
 
 const ManageUser = () => {
     const [axiosSecure] = useAxiosSecure();
@@ -11,35 +12,38 @@ const ManageUser = () => {
         return res.data;
     });
 
-    const handleMakeAdmin = (user,role) =>{
+    const handleMakeAdmin = (user, role) => {
         const body = {
             role: role
-          };
-          console.log(body);
-        fetch(`http://localhost:5000/users/role/${user._id}`, {
+        };
+        console.log(body);
+        fetch(`https://assignment-12-server-olive.vercel.app/users/role/${user._id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json"
-              },
-              body: JSON.stringify(body)
+            },
+            body: JSON.stringify(body)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            if(data.modifiedCount){
-                refetch();
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: `${user.name} is an ${role} Now!`,
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount) {
+                    refetch();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `${user.name} is an ${role} Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
     }
     return (
         <div className='w-full'>
+            <Helmet>
+                <title>MUSIC FAIRY || Manage User</title>
+            </Helmet>
             <h1 className='text-center font-bold text-2xl'>Total user:{users.length}</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
@@ -57,7 +61,7 @@ const ManageUser = () => {
                     <tbody>
                         {/* row 1 */}
                         {users.map((user, index) => <tr key={user._id}>
-                            <th>{index+1}
+                            <th>{index + 1}
                             </th>
                             <td>
                                 <div className="flex items-center space-x-3">
@@ -74,10 +78,10 @@ const ManageUser = () => {
                             <td>
                                 {user?.email}
                             </td>
-                            <td>{user?.role!=='admin'?<>{user?.role}</>:<><button className='btn btn-primary'><FaUserSecret></FaUserSecret></button></>}</td>
+                            <td>{user?.role !== 'admin' ? <>{user?.role}</> : <><button className='btn btn-primary'><FaUserSecret></FaUserSecret></button></>}</td>
                             <th>
-                                <button className="btn btn-ghost btn-xs" onClick={()=>handleMakeAdmin(user,"admin")}>Make Admin</button>
-                                <button className="btn btn-ghost btn-xs" onClick={()=>handleMakeAdmin(user,"instructor")}>Make Instructor</button>
+                                <button className="btn btn-ghost btn-xs" onClick={() => handleMakeAdmin(user, "admin")}>Make Admin</button>
+                                <button className="btn btn-ghost btn-xs" onClick={() => handleMakeAdmin(user, "instructor")}>Make Instructor</button>
                             </th>
                         </tr>)}
 

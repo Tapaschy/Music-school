@@ -22,7 +22,7 @@ const SingleClass = ({ singleclass }) => {
     const handleAddToCart = () => {
         if (user && user.email) {
             const cartItem = { classId: _id, classname, classurl, price, seats, email: user.email }
-            fetch('http://localhost:5000/carts', {
+            fetch('https://assignment-12-server-olive.vercel.app/carts', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

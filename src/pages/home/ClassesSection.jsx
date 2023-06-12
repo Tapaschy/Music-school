@@ -5,7 +5,8 @@ import SingleClass from '../Classes/SingleClass';
 
 const ClassesSection = () => {
     const [classes]=useFilterclass();
-    const approvedclasses = classes.filter(classes => classes.status === 'approve').sort((a, b) => b.price - a.price);
+    // const approvedclasses = classes.filter(classes => classes.status === 'approve').sort((a, b) => b.price - a.price);
+    const approvedclasses = classes.filter(classes => classes.status === 'approve').sort((a, b) => b.enrolled - a.enrolled);
     const topsixclass = approvedclasses.slice(0, 6);
     return (
         <div className='container mx-auto'>

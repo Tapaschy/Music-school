@@ -17,29 +17,30 @@ const Signup = () => {
         signInWithGoogle,
         createUser,
         updateUserProfile,
-      } = useContext(AuthContext);
-      const navigate = useNavigate();
-      const location = useLocation();
-      const from = location.state?.from?.pathname || '/';
+    } = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
-      const [show, setShow] = useState(false);
-      const handleTogglePassword = () => {
-          setShow(!show);
-      };
+    const [show, setShow] = useState(false);
+    const handleTogglePassword = () => {
+        setShow(!show);
+    };
 
     // for password validation
     const validationSchema = Yup.object().shape({
         password: Yup.string()
             .required('Password is required')
             .min(6, 'Password must be at least 6 characters')
-            .matches(/(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,'Password must 1 small,1 capital letter ,1 number,1 special character'),
+            .matches(/(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/, 'Password must 1 small,1 capital letter ,1 number,1 special character'),
         confirmPassword: Yup.string()
             .required('Confirm Password is required')
             .oneOf([Yup.ref('password')], 'Passwords must match'),
-        photo:Yup.mixed().required('File is required'),
-        name:Yup.string().required(' name is required'),
-        email:Yup.string().required(' email is required'),
-            
+        photo: Yup.mixed().required('File is required'),
+        name: Yup.string().required(' name is required'),
+        email: Yup.string().required(' email is required'),
+
     });
     const formOptions = { resolver: yupResolver(validationSchema) };
     const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
@@ -57,59 +58,61 @@ const Signup = () => {
             method: 'POST',
             body: formData
         })
-        .then(res => res.json())
-          .then(imageData => {
-            const imageUrl = imageData.data.display_url;
-            console.log(imageData);
-    
-            createUser(data.email, data.password)
-              .then(result => {
-                updateUserProfile(data.name, imageUrl)
-                  .then(() => {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'User created successfully',
-                        showConfirmButton: false,
-                        timer: 1500
-                      });
-                      saveUser(result.user);
-                    navigate(from, { replace: true });
-                  })
-                  .catch(err => {
-                    setLoading(false)
-                    console.log(err.message)
+            .then(res => res.json())
+            .then(imageData => {
+                const imageUrl = imageData.data.display_url;
+                console.log(imageData);
 
-                  })
-              })
-              .catch(err => {
+                createUser(data.email, data.password)
+                    .then(result => {
+                        updateUserProfile(data.name, imageUrl)
+                            .then(() => {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'User created successfully',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                saveUser(result.user);
+                                navigate(from, { replace: true });
+                            })
+                            .catch(err => {
+                                setLoading(false)
+                                console.log(err.message)
+                                setError(err.message);
+
+                            })
+                    })
+                    .catch(err => {
+                        setLoading(false)
+                        console.log(err.message)
+                        setError(err.message);
+
+                    })
+            })
+            .catch(err => {
                 setLoading(false)
                 console.log(err.message)
+                setError(err.message);
 
-              })
-          })
-          .catch(err => {
-            setLoading(false)
-            console.log(err.message)
+            })
 
-          })
-    
-    
+
     };
     const handleGoogleSignIn = () => {
         signInWithGoogle()
-          .then(result => {
-            console.log(result.user)
-            // save user to db
-            saveUser(result.user)
-            navigate(from, { replace: true })
-          })
-          .catch(err => {
-            setLoading(false)
-            console.log(err.message)
-            // toast.error(err.message)
-          })
-      };
+            .then(result => {
+                console.log(result.user)
+                // save user to db
+                saveUser(result.user)
+                navigate(from, { replace: true })
+            })
+            .catch(err => {
+                setLoading(false)
+                console.log(err.message)
+            })
+    };
 
 
     return (
@@ -136,11 +139,11 @@ const Signup = () => {
                                     </label>
                                     <input type="text" placeholder="email"  {...register("email")} name='email' className="input input-bordered" required />
                                     {errors.email && <p>{errors.email.message}</p>}
-                                    
+
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Photo</span>
+                                        <span className="label-text">Photo only jpg*</span>
                                     </label>
                                     <input type="file" placeholder="photo" {...register("photo")} name='photo' className="file-input file-input-bordered w-full " />
                                     {errors.photo && <p>{errors.photo.message}</p>}
@@ -170,6 +173,9 @@ const Signup = () => {
                                 <button onClick={handleGoogleSignIn} className='btn btn-primary w-full mt-1 mb-1'><FaGoogle></FaGoogle></button>
                                 <Link to={"/login"}><p>Have acount Please login.</p></Link>
                             </form>
+                        </div>
+                        <div className='text-center'>
+                            <p className='text-red-800'>{error}</p>
                         </div>
                     </div>
                 </div>

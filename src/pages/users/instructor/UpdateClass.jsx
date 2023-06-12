@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useLoaderData } from 'react-router-dom';
 import SectionTitle from '../../../components/Title/SectionTitle';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 
 const UpdateClass = () => {
@@ -16,23 +17,23 @@ const UpdateClass = () => {
         // console.log(data);
 
         // console.log(newdata);
-        const { name, category, classname, email, price,image, seats, status, classurl, photoUrl } = data;
+        const { name, category, classname, email, price, image, seats, status, classurl, photoUrl } = data;
         const newClass = {
             Instructorname: newdata?.Instructorname,
             price: parseFloat(price),
-            email:newdata?.email,
+            email: newdata?.email,
             category,
             classname,
-            seats:parseFloat(seats),
-            classurl:image,
-            status:newdata?.status,
-            photoUrl:newdata?.photoURL,
+            seats: parseFloat(seats),
+            classurl: image,
+            status: newdata?.status,
+            photoUrl: newdata?.photoURL,
 
         }
         console.log(newClass);
 
 
-        fetch(`http://localhost:5000/classes/updateclass/${newdata._id}`, {
+        fetch(`https://assignment-12-server-olive.vercel.app/classes/updateclass/${newdata._id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"
@@ -61,6 +62,9 @@ const UpdateClass = () => {
 
     return (
         <div className="w-full px-10">
+            <Helmet>
+                <title>MUSIC FAIRY || Update Class</title>
+            </Helmet>
             <SectionTitle subHeading="" heading="Add an Class" ></SectionTitle>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control w-full mb-4">
@@ -75,7 +79,7 @@ const UpdateClass = () => {
                     <label className="label">
                         <span className="label-text font-semibold">Instructor Name*</span>
                     </label>
-                    <input defaultValue={newdata.Instructorname} type="text" disabled placeholder={newdata.Instructorname} 
+                    <input defaultValue={newdata.Instructorname} type="text" disabled placeholder={newdata.Instructorname}
                         {...register('Instructorname')}
                         className="input input-bordered w-full " />
                 </div>

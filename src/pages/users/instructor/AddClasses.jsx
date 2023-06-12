@@ -3,6 +3,7 @@ import SectionTitle from '../../../components/Title/SectionTitle';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../providers/AuthProvider';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 const img_hosting_token = import.meta.env.VITE_Image_Upload_token;
 
 const AddClasses = () => {
@@ -39,7 +40,7 @@ const AddClasses = () => {
 
                     }
                     console.log(newClass);
-                    fetch(`http://localhost:5000/classes`, {
+                    fetch(`https://assignment-12-server-olive.vercel.app/classes`, {
                         method: 'POST',
                         headers: {
                             "Content-Type": "application/json"
@@ -62,31 +63,15 @@ const AddClasses = () => {
                     })
 
 
-
-
-                    // axiosSecure.post('/menu', newItem)
-                    //     .then(data => {
-                    //         console.log('after posting new menu item', data.data)
-                    //         if (data.data.insertedId) {
-                    //             reset();
-                    //             Swal.fire({
-                    //                 position: 'top-end',
-                    //                 icon: 'success',
-                    //                 title: 'Item added successfully',
-                    //                 showConfirmButton: false,
-                    //                 timer: 1500
-                    //             })
-                    //         }
-                    //     })
                 }
             })
 
-        // const {name,category,classname,email,price,seats,status,classurl,photoUrl} = data;
-        // const newItem = {name:user?.displayName}
-        // console.log(newItem);
     };
     return (
         <div className="w-full px-10">
+                        <Helmet>
+                <title>MUSIC FAIRY || Add Class</title>
+            </Helmet>
             <SectionTitle subHeading="" heading="Add an Class" ></SectionTitle>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control w-full mb-4">
@@ -141,7 +126,7 @@ const AddClasses = () => {
 
                 <div className="form-control w-full my-4">
                     <label className="label">
-                        <span className="label-text">Item Image*</span>
+                        <span className="label-text">Item Image only jpg*</span>
                     </label>
                     <input type="file" {...register("image", { required: true })} className="file-input file-input-bordered w-full " />
                 </div>

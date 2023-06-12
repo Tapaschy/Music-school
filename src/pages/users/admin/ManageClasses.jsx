@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useFilterclass from '../../../hooks/useFilterclass';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const ManageClasses = () => {
     const [classes, refetch] = useFilterclass();
@@ -8,14 +9,14 @@ const ManageClasses = () => {
     const [inputValue, setInputValue] = useState('');
     console.log(disable);
 
-    const handleclassStatus = (singleclass, status,feedback) => {
+    const handleclassStatus = (singleclass, status, feedback) => {
         setDisable(status);
         const body = {
             status: status,
-            feedback:feedback
+            feedback: feedback
         };
         console.log(body);
-        fetch(`http://localhost:5000/classes/status/${singleclass._id}`, {
+        fetch(`https://assignment-12-server-olive.vercel.app/classes/status/${singleclass._id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json"
@@ -41,6 +42,9 @@ const ManageClasses = () => {
     }
     return (
         <div className='w-full'>
+            <Helmet>
+                <title>MUSIC FAIRY || Manage Class</title>
+            </Helmet>
             <h1 className='text-center font-bold text-3xl'>Total Classes:{classes.length}</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
@@ -89,12 +93,12 @@ const ManageClasses = () => {
                             </td>
                             <td>{singleclass.status}</td>
                             <th>
-                                <button disabled={singleclass.status === disable || singleclass.status === 'approve'} className="btn btn-ghost btn-xs" onClick={() => handleclassStatus(singleclass, "approve",singleclass.feedback)}>Approve</button>
-                                <button disabled={singleclass.status === disable || singleclass.status === 'deny'} className="btn btn-ghost btn-xs" onClick={() => handleclassStatus(singleclass, "deny",singleclass.feedback)}>Deny </button>
+                                <button disabled={singleclass.status === disable || singleclass.status === 'approve'} className="btn btn-ghost btn-xs" onClick={() => handleclassStatus(singleclass, "approve", singleclass.feedback)}>Approve</button>
+                                <button disabled={singleclass.status === disable || singleclass.status === 'deny'} className="btn btn-ghost btn-xs" onClick={() => handleclassStatus(singleclass, "deny", singleclass.feedback)}>Deny </button>
                                 <label disabled={singleclass.status === 'pending' || singleclass.status === 'approve'} htmlFor={singleclass._id} className="btn btn-ghost btn-xs">send feedback</label>
                                 {/*  */}
 
-                                
+
 
                                 {/* Put this part before </body> tag */}
                                 <input type="checkbox" id={singleclass._id} className="modal-toggle" />
@@ -102,9 +106,9 @@ const ManageClasses = () => {
                                     <div className="modal-box">
                                         <h3 className="font-bold text-lg">Type your feedback</h3>
                                         <textarea onChange={(e) => setInputValue(e.target.value)} className="textarea textarea-bordered" placeholder="Bio"></textarea>
-                                        <button className='btn' onClick={() => handleclassStatus(singleclass,singleclass.status,inputValue)}>Submit</button>
+                                        <button className='btn' onClick={() => handleclassStatus(singleclass, singleclass.status, inputValue)}>Submit</button>
                                         <div className="modal-action">
-                                        
+
                                             <label htmlFor={singleclass._id} className="btn">Close!</label>
                                         </div>
                                     </div>

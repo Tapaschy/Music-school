@@ -13,13 +13,14 @@ const InstructorSection = () => {
     });
 
     const instructors = users.filter(users => users.role === 'instructor');
+    const instructorf = instructors.slice(0, 6);
 
     return (
         <div className='mt-20 container mx-auto'>
             <SectionTitle subHeading="" heading="Top Instructors" ></SectionTitle>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
 
-                {instructors.map(instructor =>
+                {instructorf.map(instructor =>
                     <SingleInstructor key={instructor.name}
                         instructor={instructor}
                     ></SingleInstructor>)}

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import CheckoutForm from './CheckoutForm';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+import { Helmet } from 'react-helmet-async';
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_Pay_Upload_token);
@@ -12,10 +13,10 @@ const stripePromise = loadStripe(import.meta.env.VITE_Pay_Upload_token);
 const MyselectedClasses = () => {
     const [carts, refetch] = useCart();
     // const[price,setPrice]=useState('');
-    const[classcart,setclasscart]=useState('');
+    const [classcart, setclasscart] = useState('');
     // const[id,setId]=useState('');
     // console.log(price);
-    const handleprice=(cart)=>{
+    const handleprice = (cart) => {
 
         setclasscart(cart);
     };
@@ -31,7 +32,7 @@ const MyselectedClasses = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/carts/${cart._id}`, {
+                fetch(`https://assignment-12-server-olive.vercel.app/carts/${cart._id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -50,6 +51,9 @@ const MyselectedClasses = () => {
     };
     return (
         <div className='w-full'>
+            <Helmet>
+                <title>MUSIC FAIRY || My selected Class</title>
+            </Helmet>
             <h1 className='text-center font-bold text-2xl'>Total Booked Class:{carts.length}</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
@@ -91,7 +95,7 @@ const MyselectedClasses = () => {
                                 <button onClick={() => handleDelete(cart)} className="btn btn-ghost btn-xs" >Delete</button>
                                 {/* <Link to="/dashboard/payment"><button className="btn btn-ghost btn-xs" >Pay</button></Link> */}
 
-                                <label onClick={()=>handleprice(cart)} htmlFor={cart._id} className="btn btn-ghost btn-xs">Pay</label>
+                                <label onClick={() => handleprice(cart)} htmlFor={cart._id} className="btn btn-ghost btn-xs">Pay</label>
 
                                 {/* Put this part before </body> tag */}
                                 <input type="checkbox" id={cart._id} className="modal-toggle" />
@@ -101,7 +105,7 @@ const MyselectedClasses = () => {
                                         <div>
 
                                             <Elements stripe={stripePromise}>
-                                                <CheckoutForm  classcart={classcart}/>
+                                                <CheckoutForm classcart={classcart} />
                                             </Elements>
                                         </div>
                                         <div className="modal-action">

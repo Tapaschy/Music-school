@@ -1,19 +1,22 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
 import Tablerow from './Tablerow';
+import { Helmet } from 'react-helmet-async';
 
 const MyClasses = () => {
-    const{user}=useContext(AuthContext);
-    const { data: myclasses = [], refetch,isLoading } = useQuery(['myclasses'], async () => {
-        const res = await fetch(`http://localhost:5000/classes/${user.email}`)
+    const { user } = useContext(AuthContext);
+    const { data: myclasses = [], refetch, isLoading } = useQuery(['myclasses'], async () => {
+        const res = await fetch(`https://assignment-12-server-olive.vercel.app/classes/${user.email}`)
         return res.json();
     })
     // console.log(myclasses);
 
     return (
         <div className='w-full'>
+            <Helmet>
+                <title>MUSIC FAIRY || My class</title>
+            </Helmet>
             <h1 className='font-bold text-2xl text-center'>Total Classes:{myclasses.length}</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
@@ -33,9 +36,9 @@ const MyClasses = () => {
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        {myclasses.map((singlecls, index) =><Tablerow key={singlecls._id}
-                        singlecls={singlecls}
-                        index={index}
+                        {myclasses.map((singlecls, index) => <Tablerow key={singlecls._id}
+                            singlecls={singlecls}
+                            index={index}
                         ></Tablerow>)}
 
                     </tbody>

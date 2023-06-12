@@ -18,7 +18,6 @@ import AdminRoute from './AdminRoute'
 import AdminHome from '../pages/users/admin/AdminHome'
 import InstructorHome from '../pages/users/instructor/InstructorHome'
 import StudentHome from '../pages/users/student/StudentHome'
-import Payment from '../pages/users/student/Payment'
 import EnrolledClasses from '../pages/users/student/EnrolledClasses'
 
 export const router = createBrowserRouter([
@@ -82,17 +81,13 @@ export const router = createBrowserRouter([
             element: <EnrolledClasses></EnrolledClasses>
           },
         {
-            path: 'payment',
-            element: <Payment></Payment>
-          },
-        {
             path: 'myclass',
             element: <MyClasses></MyClasses>
           },
         {
             path: 'updateclass/:id',
             element: <UpdateClass></UpdateClass>,
-            loader:({params})=>fetch(`http://localhost:5000/classes/updateclass/${params.id}`)
+            loader:({params})=>fetch(`https://assignment-12-server-olive.vercel.app/classes/updateclass/${params.id}`)
           },
           {
             path: 'selectedclass',
