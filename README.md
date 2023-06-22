@@ -15,7 +15,7 @@ This is  Music Fairy  learn your desire Music Instrument.
 
 
 ## Site link
-Wnat to explore !!!!
+Want to explore !!!!
 Site link
 
 https://music-fairy.web.app/
